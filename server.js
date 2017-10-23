@@ -16,12 +16,27 @@ app.get("/",function(req,res){
 })
 app.post("/checkin",function(req,res){
   var date = new Date()
-  if(!db.getData(`${date.getMonth()}/${date.getDate()}/${req.body.user_name}`)){
-    db.push(`${date.getMonth()}/${date.getDate()}`,req.body.user_name)
-    res.send("Thanks for checking in!")
-  } else {
-    res.send("You're already checked in for today!")
+
+
+  try {
+    var data = db.getData(`${date.getMonth()}/${date.getDate()}/${req.body.user_name}`);
+    } catch(error) {
+      if(error){
+        db.push(`${date.getMonth()}/${date.getDate()}`,req.body.user_name)
+           res.send("Thanks for checking in!")
+    } else {
+      res.send("You're already checked in for today!")
+    }
   }
+
+
+
+  // if(!db.getData(`${date.getMonth()}/${date.getDate()}/${req.body.user_name}`)){
+  //   db.push(`${date.getMonth()}/${date.getDate()}`,req.body.user_name)
+  //   res.send("Thanks for checking in!")
+  // } else {
+  //   res.send("You're already checked in for today!")
+  // }
 
 })
 app.listen(process.env.PORT)
