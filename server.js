@@ -25,7 +25,6 @@ app.post("/checkin",function(req,res){
         there = false
       }
     }
-  }
 
 console.log(there)
 
