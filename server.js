@@ -22,13 +22,13 @@ app.post("/checkin",function(req,res){
 
 
   var date = new Date()
+  var month = date.getMonth()
+  var day = date.getDate()
   var there = true;
 
-  try {
-    var data = db.getData(`/${date.getMonth()}/${date.getDate()}/${req.body.user_name}`);
-    } catch(error) {
-        there = false
-    }
+  if(!db.getData("/").month.day[req.body.user_name]){
+    there = false
+  }
 
 console.log(there)
 
