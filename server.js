@@ -7,6 +7,7 @@ app.get("/",function(req,res){
 })
 app.get("/checkin",function(req,res){
   console.log("Request~",req)
-  res.send("success")
+  res.status(200)
+  res.send()
 })
 app.listen(process.env.PORT)
