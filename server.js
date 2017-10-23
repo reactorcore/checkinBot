@@ -27,9 +27,7 @@ app.post("/checkin",function(req,res){
   try {
     var data = db.getData(`/${date.getMonth()}/${date.getDate()}/${req.body.user_name}`);
     } catch(error) {
-      if(error){
         there = false
-      }
     }
 
 console.log(there)
