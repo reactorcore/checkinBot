@@ -7,6 +7,6 @@ app.get("/",function(req,res){
 })
 app.post("/checkin",function(req,res){
   console.log("Request~",req)
-  res.send("Request",req)
+  res.send(req)
 })
 app.listen(process.env.PORT)
