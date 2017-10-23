@@ -15,6 +15,12 @@ app.get("/",function(req,res){
   res.send("success")
 })
 app.post("/checkin",function(req,res){
+
+  if(req.body.text === "get"){
+    res.send(db.getData("/"))
+  }
+
+
   var date = new Date()
   var there = true;
 
