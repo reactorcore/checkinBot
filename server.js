@@ -6,7 +6,7 @@ app.get("/",function(req,res){
   res.send("success")
 })
 app.post("/checkin",function(req,res){
-  console.log("Request~",req)
+  console.log(req.data)  
   res.send("JSON.stringify(req)")
 })
 app.listen(process.env.PORT)
