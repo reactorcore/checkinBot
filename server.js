@@ -7,7 +7,7 @@ app.get("/",function(req,res){
 })
 app.post("/checkin",function(req,res){
   console.log(req.data)
-
-  res.send(req)
+  let a = JSON.stringify(req)
+  res.send(a)
 })
 app.listen(process.env.PORT)
