@@ -25,7 +25,7 @@ app.post("/checkin",function(req,res){
   var there = true;
 
   try {
-    var data = db.getData(`${date.getMonth()}/${date.getDate()}/${req.body.user_name}`);
+    var data = db.getData(`/${date.getMonth()}/${date.getDate()}/${req.body.user_name}`);
     } catch(error) {
       if(error){
         there = false
@@ -36,7 +36,7 @@ console.log(there)
 
 
   if(!there){
-    db.push(`${date.getMonth()}/${date.getDate()}`,req.body.user_name)
+    db.push(`/${date.getMonth()}/${date.getDate()}`,req.body.user_name)
     res.send("Thanks for checking in!")
   }
   if(there) {
