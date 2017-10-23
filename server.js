@@ -29,7 +29,7 @@ app.post("/checkin",function(req,res){
 console.log(there)
 
 
-  if(!there)){
+  if(!there){
     db.push(`${date.getMonth()}/${date.getDate()}`,req.body.user_name)
     res.send("Thanks for checking in!")
   }
