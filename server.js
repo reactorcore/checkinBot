@@ -1,6 +1,11 @@
 let express = require("express")
 let app = express()
 
+var JsonDB = require('node-json-db');
+var db = new JsonDB("myDataBase", true, false);
+
+//getMonth getDate
+
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -10,7 +15,13 @@ app.get("/",function(req,res){
   res.send("success")
 })
 app.post("/checkin",function(req,res){
-  console.log(req.body)
-  res.send("K")
+  var date = new Date()
+  if(!db.getData(`${date.getMonth()}/${date.getDate()}/${req.body.user_name}`)){
+    db.push(`${date.getMonth()}/${date.getDate()}`,req.body.user_name)
+    res.send("Thanks for checking in!")
+  } else {
+    res.send("You're already checked in for today!")
+  }
+
 })
 app.listen(process.env.PORT)
