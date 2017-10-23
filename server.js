@@ -26,6 +26,8 @@ app.post("/checkin",function(req,res){
   var day = date.getDate()
   var there = true;
 
+console.log(db.getData("/"))
+
   if(!db.getData("/").month){
     there = false
   } else if (!db.getData("/").month.day) {
