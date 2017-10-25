@@ -27,11 +27,13 @@ app.post("/checkin",function(req,res){
   //team_domain
   // moment().format('L'); // 01/14/2013
 
-  knex('Checkins').insert({
-    userName: req.body.user_name,
-    className: req.body.team_domain,
-    dateCheckedIn: moment().format('L')
-  })
+  knex.raw(`INSERT INTO Checkins (userName, className, dateCheckedIn) VALUES (${req.body.user_name}, ${req.body.team_domain}, ${moment().format('L')});`)
+
+  // knex('Checkins').insert({
+  //   userName: req.body.user_name,
+  //   className: req.body.team_domain,
+  //   dateCheckedIn: moment().format('L')
+  // })
 
   console.log(req.body)
 })
