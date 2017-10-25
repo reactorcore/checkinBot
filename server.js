@@ -36,10 +36,14 @@ app.post("/checkin",function(req,res){
   //INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES (${req.body.user_name}, ${req.body.team_domain}, ${moment().format('L')});`
   // moment().format('L'); // 01/14/2013
 
-db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_name+"' AND className = '"+req.body.team_domain+"';",function(err, res, fie){
-  res.forEach(function(ele){
-    console.log(ele.dateCheckedIn)
-  })
+db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_name+"' AND className = '"+req.body.team_domain+"';", function (error, results, fields) {
+  if(error){
+    console.log(error)
+  } else {
+    results.forEach(function(e){
+      console.log(e.dateCheckedIn)
+    })
+  }
 })
 
   // if(){
@@ -48,13 +52,13 @@ db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_na
 
   //db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_name+"', '"+req.body.team_domain+"', '"+moment().format('L')+"');", function (error, results, fields) {
 
-    if(error){
-      console.log(error)
-    } else {
-      console.log(results)
-    }
-
-});
+    // if(error){
+    //   console.log(error)
+    // } else {
+    //   console.log(results)
+    // }
+//
+// });
   //console.log(req.body)
   res.send('standby')
 })
