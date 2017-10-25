@@ -7,7 +7,7 @@ var db = mysql.createConnection({
   user     : process.env.USER,
   password : process.env.PASSWORD
 });
-setTimeout(
+
 db.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
@@ -16,7 +16,6 @@ db.connect(function(err) {
 
   console.log('connected as id ' + db.threadId);
 });
-, 3000)
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
