@@ -1,4 +1,4 @@
 # checkinBot
 
 
-CheckinBot is build using express and mySQL
+CheckinBot is built using express and mySQL
