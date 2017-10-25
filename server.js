@@ -35,7 +35,7 @@ app.post("/checkin",function(req,res){
   //team_domain
   //INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES (${req.body.user_name}, ${req.body.team_domain}, ${moment().format('L')});`
   // moment().format('L'); // 01/14/2013
-  db.query(`INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES (${req.body.user_name}, ${req.body.team_domain}, ${moment().format('L')});`, function (error, results, fields) {
+  db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ("+req.body.user_name+", "+req.body.team_domain+", "+moment().format('L')+");", function (error, results, fields) {
 
     if(error){
       console.log(error)
