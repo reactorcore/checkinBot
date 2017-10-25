@@ -40,10 +40,33 @@ db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_na
   if(error){
     console.log(error)
   } else {
+
+    var alreadyCheckedIn = false
+
     results.forEach(function(e){
-      console.log(e.dateCheckedIn)
+
+      if(e.dateCheckedIn === moment().format('L')){
+        alreadyCheckedIn = true
+      }
+
     })
+
+    if(alreadyCheckedIn){
+
+      return res.send("Already Checked in for today, Good Job!")
+
+    } else {
+      db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_name+"', '"+req.body.team_domain+"', '"+moment().format('L')+"');", function (error, results, fields) {
+        if(error){
+          console.log(error)
+        } else {
+          return res.send("Checked in!")
+        }
+    });
+    }
+
   }
+
 })
 
   // if(){
@@ -60,6 +83,5 @@ db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_na
 //
 // });
   //console.log(req.body)
-  res.send('standby')
 })
 app.listen(process.env.PORT)
