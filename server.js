@@ -2,22 +2,16 @@ let express = require("express")
 let app = express()
 var mysql = require('mysql');
 
-var db = mysql.createConnection({
-  host     : process.env.HOST,
-  user     : process.env.USER,
-  password : process.env.PASSWORD
-});
 
-console.log(process.env)
-
-db.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
+var knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host     : process.env.HOST,
+    user     : process.env.USER,
+    password : process.env.PASSWORD
   }
-
-  console.log('connected as id ' + db.threadId);
 });
+
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -32,6 +26,12 @@ app.post("/checkin",function(req,res){
   //user_name
   //team_domain
   // moment().format('L'); // 01/14/2013
+
+  knex('Checkins').insert({
+    userName: req.body.user_name,
+    className: req.body.team_domain,
+    dateCheckedIn: moment().format('L')
+  })
 
   console.log(req.body)
 })
