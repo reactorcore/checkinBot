@@ -35,7 +35,18 @@ app.post("/checkin",function(req,res){
   //team_domain
   //INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES (${req.body.user_name}, ${req.body.team_domain}, ${moment().format('L')});`
   // moment().format('L'); // 01/14/2013
-  db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_name+"', '"+req.body.team_domain+"', '"+moment().format('L')+"');", function (error, results, fields) {
+
+db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_name+"' AND className = '"+req.body.team_domain+"';",function(err, res, fie){
+  res.forEach(function(ele){
+    console.log(ele.dateCheckedIn)
+  })
+})
+
+  // if(){
+  //
+  // }
+
+  //db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_name+"', '"+req.body.team_domain+"', '"+moment().format('L')+"');", function (error, results, fields) {
 
     if(error){
       console.log(error)
