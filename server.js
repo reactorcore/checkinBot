@@ -27,7 +27,7 @@ app.post("/checkin",function(req,res){
   //team_domain
   // moment().format('L'); // 01/14/2013
 
-  knex.raw(`INSERT INTO Checkins (userName, className, dateCheckedIn) VALUES (${req.body.user_name}, ${req.body.team_domain}, ${moment().format('L')});`)
+  knex.raw(`INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES (${req.body.user_name}, ${req.body.team_domain}, ${moment().format('L')});`)
 
   // knex('Checkins').insert({
   //   userName: req.body.user_name,
@@ -35,6 +35,6 @@ app.post("/checkin",function(req,res){
   //   dateCheckedIn: moment().format('L')
   // })
 
-  console.log(req.body)
+  res.send("yuh")
 })
 app.listen(process.env.PORT)
