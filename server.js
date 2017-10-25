@@ -8,6 +8,8 @@ var db = mysql.createConnection({
   password : process.env.PASSWORD
 });
 
+console.log(process.env)
+
 db.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
