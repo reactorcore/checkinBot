@@ -2,6 +2,7 @@ let express = require("express")
 let app = express()
 var mysql = require('mysql');
 var moment = require('moment')
+var twix = require('twix');
 
 
 var db = mysql.createConnection({
@@ -25,63 +26,77 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/",function(req,res){
+app.use(express.static("./client"))
+
+app.get("/admin",function(req,res){
   console.log("Request~",req)
-  res.send("Server-UP")
+  res.sendFile(__dirname+'/client/index.html')
 })
+
+app.get("/init", function(req, res){
+  db.query("SELECT DISTINCT className FROM AllTheBase.Checkins", function (error, results, fields) {
+    res.send(results)
+  })
+})
+
+// app.get('/getclass', function(req, res) {
+//    res.json({ querystring_breed: req.query.breed });
+// });
+
+app.get("/getclass", function(req, res){
+var query = "SELECT * FROM AllTheBase.Checkins WHERE className = '" + req.query.class + "'"
+  db.query(query, function (error, results, fields) {
+    const start = moment(results[0].dateCheckedIn, "L")
+    const end = moment(results[results.length-1].dateCheckedIn, "L")
+    //console.log("min & max ",start, end)
+    var itr = moment.twix(start,end).iterate("days");
+    var range=[];
+    while(itr.hasNext()){
+        range.push(itr.next().toDate())
+    }
+    var newRange = range.reduce(function(a,e){
+      a.push(moment(e).format("L"));
+      return a
+    },[])
+    let out = {data:results, dates:newRange}
+    res.send(out)
+  })
+})
+
 app.post("/checkin",function(req,res){
 
-  //user_name
-  //team_domain
-  //INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES (${req.body.user_name}, ${req.body.team_domain}, ${moment().format('L')});`
-  // moment().format('L'); // 01/14/2013
+  db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_name+"' AND className = '"+req.body.team_domain+"';", function (error, results, fields) {
+    if(error){
+      console.log(error)
+    } else {
 
-db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_name+"' AND className = '"+req.body.team_domain+"';", function (error, results, fields) {
-  if(error){
-    console.log(error)
-  } else {
+      var alreadyCheckedIn = false
 
-    var alreadyCheckedIn = false
+      results.forEach(function(e){
 
-    results.forEach(function(e){
+        if(e.dateCheckedIn === moment().format('L')){
+          alreadyCheckedIn = true
+        }
 
-      if(e.dateCheckedIn === moment().format('L')){
-        alreadyCheckedIn = true
+      })
+
+      if(alreadyCheckedIn){
+
+        return res.send("Already Checked in for today, Good Job!")
+
+      } else {
+        db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_name+"', '"+req.body.team_domain+"', '"+moment().format('L')+"');", function (error, results, fields) {
+          if(error){
+            console.log(error)
+          } else {
+            return res.send("Checked in!")
+          }
+      });
       }
 
-    })
-
-    if(alreadyCheckedIn){
-
-      return res.send("Already Checked in for today, Good Job!")
-
-    } else {
-      db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_name+"', '"+req.body.team_domain+"', '"+moment().format('L')+"');", function (error, results, fields) {
-        if(error){
-          console.log(error)
-        } else {
-          return res.send("Checked in!")
-        }
-    });
     }
 
-  }
+  })
 
 })
-
-  // if(){
-  //
-  // }
-
-  //db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_name+"', '"+req.body.team_domain+"', '"+moment().format('L')+"');", function (error, results, fields) {
-
-    // if(error){
-    //   console.log(error)
-    // } else {
-    //   console.log(results)
-    // }
-//
-// });
-  //console.log(req.body)
-})
-app.listen(process.env.PORT)
+app.listen(process.env.PORT || 1337)

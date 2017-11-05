@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="app">
+
+      <div id="sidebar-container">
+        <!-- Containes the sidebar -->
+        <div id="toplogo">
+          <img width=214 src="https://static1.squarespace.com/static/ta/522a22cbe4b04681b0bff826/3066/assets/legacy-img/brandguide/logo/hack-reactor-logo-gray-blue.png"/>
+        </div>
+        <h1 id="classes">Select Class </h1>
+        <div id="options">
+          <ul id="listCohorts">
+          </ul>
+        </div>
+      </div>
+
+      <div id="chart-container">
+        <canvas id="myChart"></canvas>
+        <!-- Containes the chats -->
+      </div>
+
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+  <script src="index.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+</html>

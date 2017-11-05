@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+}
+ul {
+  padding-left: 7px;
+}
+li {
+  padding-top: 5px;
+  font-size: 18px;
+  text-align: center;
+  list-style-type: none;
+  font-family: 'Source Sans Pro', sans-serif;
+
+}
+li:hover {
+  text-decoration: underline;
+}
+#myChart {
+  width: 75vw;
+}
+/*#chart-container{
+  width: 400px;
+  height: 400px;
+}*/
+#classes{
+  text-align: center;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+#sidebar-container {
+  background-color: #0090DA;
+  height: 100vh;
+  width: 220px;
+  float: left;
+}
+#toplogo {
+  border: solid 3px black;
+  background-color: white;
+}
