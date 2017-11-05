@@ -3,13 +3,13 @@ console.log("things are good")
 var settings0 = {
 "async": true,
 "crossDomain": true,
-"url": "http://localhost:1337/init",
+"url": "https://all-server.herokuapp.com/init",
 "method": "GET",
 }
 var settings1 = {
 "async": true,
 "crossDomain": true,
-"url": "http://localhost:1337/classdata",
+"url": "https://all-server.herokuapp.com/classdata",
 "method": "GET",
 "headers": {
     "content-type": "application/json",
@@ -29,7 +29,7 @@ $.ajax(settings0).done(function (response) {
 
 $(document).on('click','li',function(){
   console.log(this.innerText)
-  settings1.url = "http://localhost:1337/getclass?class="+this.innerText
+  settings1.url = "https://all-server.herokuapp.com/getclass?class="+this.innerText
   $.ajax(settings1).done(function (response) {
 
     var dataPoints = [];
