@@ -15,6 +15,10 @@ li {
 li:hover {
   text-decoration: underline;
 }
+#compareBtn{
+  width: 64px;
+  margin-left: 78px;
+}
 #myChart {
   width: 75vw;
 }
