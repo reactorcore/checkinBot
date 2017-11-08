@@ -2,11 +2,11 @@ console.log("things are good")
 var comparable = [];
 var currentChart = [];
 var myChart;
-var fillColors = [ 'rgba(0,144,218,0)',
-  'rgba(0,179,152,0)',
-  'rgba(222,124,0,0)',
-  'rgba(220,68,5,0)',
-  'rgba(134,31,65,0)' ];
+var fillColors = [ 'rgba(0,144,218,0.2)',
+  'rgba(0,179,152,0.2)',
+  'rgba(222,124,0,0.2)',
+  'rgba(220,68,5,0.2)',
+  'rgba(134,31,65,0.2)' ];
 var hrColors = [ 'rgba(0,144,218,1)',
   'rgba(0,179,152,1)',
   'rgba(222,124,0,1)',
