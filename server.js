@@ -6,9 +6,9 @@ var twix = require('twix');
 
 
 var db = mysql.createConnection({
-  host     : "contentangel.cpg5d6shj8dy.us-east-1.rds.amazonaws.com",
-  user     : "JEng",
-  password : "ThePassword"
+  host     : process.env.HOST,
+  user     : process.env.USER,
+  password : process.env.PASSWORD
 });
 
 
