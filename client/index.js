@@ -24,13 +24,13 @@ var c = 0;
 var settings0 = {
 "async": true,
 "crossDomain": true,
-"url": "https://all-server.herokuapp.com/init",
+"url": "http://localhost:1337/init",
 "method": "GET",
 }
 var settings1 = {
 "async": true,
 "crossDomain": true,
-"url": "https://all-server.herokuapp.com/classdata",
+"url": "http://localhost:1337/classdata",
 "method": "GET",
 "headers": {
     "content-type": "application/json",
@@ -51,7 +51,7 @@ $.ajax(settings0).done(function (response) {
 
 $(document).on('click','#listCohorts li',function(){
   var clicked = this.innerText
-  settings1.url = "https://all-server.herokuapp.com/getclass?class="+clicked
+  settings1.url = "http://localhost:1337/getclass?class="+clicked
   $.ajax(settings1).done(function (response) {
 
     var dataPoints = [];
@@ -104,7 +104,7 @@ $(document).on('click','#listCohorts li',function(){
 $(document).on('click','#compareClasses li',function(){
   var coHort = this.innerText
   currentChart.push(coHort)
-  settings1.url = "https://all-server.herokuapp.com/getclass?class="+coHort
+  settings1.url = "http://localhost:1337/getclass?class="+coHort
   this.innerText = '';
   $.ajax(settings1).done(function (response) {
     var dataPoints = [];

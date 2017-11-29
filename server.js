@@ -6,9 +6,9 @@ var twix = require('twix');
 
 
 var db = mysql.createConnection({
-  host     : process.env.HOST,
-  user     : process.env.USER,
-  password : process.env.PASSWORD
+  host     : "contentangel.cpg5d6shj8dy.us-east-1.rds.amazonaws.com",
+  user     : "JEng",
+  password : "ThePassword"
 });
 
 
@@ -65,23 +65,12 @@ var query = "SELECT * FROM AllTheBase.Checkins WHERE className = '" + req.query.
 
 app.post("/checkin",function(req,res){
 
-  db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_name+"' AND className = '"+req.body.team_domain+"';", function (error, results, fields) {
+  db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_name+"' AND className = '"+req.body.team_domain+"' AND dateCheckedIn = '" + moment().format('L')+ "';", function (error, results, fields) {
     if(error){
       console.log(error)
     } else {
-
-      var alreadyCheckedIn = false
-
-      results.forEach(function(e){
-
-        if(e.dateCheckedIn === moment().format('L')){
-          alreadyCheckedIn = true
-        }
-
-      })
-
-      if(alreadyCheckedIn){
-
+      console.log(results)
+      if(results.length){
         return res.send("Already Checked in for today, Good Job!")
 
       } else {
@@ -99,4 +88,5 @@ app.post("/checkin",function(req,res){
   })
 
 })
+console.log(moment())
 app.listen(process.env.PORT || 1337)
