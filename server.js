@@ -12,9 +12,7 @@ var db = mysql.createConnection({
   password : process.env.PASSWORD
 });
 
-console.log(moment())
-console.log(moment().tz('America/New_York'))
-
+console.log(moment().format("L"))
 
 db.connect(function(err) {
   if (err) {
