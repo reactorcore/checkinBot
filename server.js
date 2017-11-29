@@ -5,12 +5,15 @@ var moment = require('moment')
 var twix = require('twix');
 
 
+
 var db = mysql.createConnection({
   host     : process.env.HOST,
   user     : process.env.USER,
   password : process.env.PASSWORD
 });
 
+console.log(moment())
+console.log(moment().tz('America/New_York'))
 
 
 db.connect(function(err) {

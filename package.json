@@ -24,6 +24,7 @@
     "knex": "^0.13.0",
     "moment": "^2.19.1",
     "moment-range": "^3.0.3",
+    "moment-timezone": "^0.5.14",
     "mysql": "^2.15.0",
     "node-json-db": "^0.7.3",
     "twix": "^1.2.1"
