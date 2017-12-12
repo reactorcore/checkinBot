@@ -52,15 +52,17 @@ app.get("/studentnames", function(req, res){
   console.log(classQuery)
   console.log(checkedInQuery)
   db.query(classQuery, function (error, results, fields) {
-    classNames=results;
+    classNames=results.map(function(e){
+      return e.userName
+    });
     db.query(checkedInQuery, function (error, results, fields) {
       attended=results;
       console.log(classNames)
       console.log(attended)
       var out = []
       for(name in classNames){
-        if(attended.indexOf(name) === -1){
-          out.push(name)
+        if(attended.indexOf(name.userName) === -1){
+          out.push(name.userName)
         }
       }
       res.send(out)
