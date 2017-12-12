@@ -41,7 +41,7 @@ app.get("/init", function(req, res){
 })
 
 
-app.get("/studentnames", function(req, res){
+app.get("/absent", function(req, res){
 
   var q = req.query;
   console.log(q)
