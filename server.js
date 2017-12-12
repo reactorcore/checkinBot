@@ -56,13 +56,15 @@ app.get("/studentnames", function(req, res){
       return e.userName
     });
     db.query(checkedInQuery, function (error, results, fields) {
-      attended=results;
+      attended=results.map(function(e){
+        return e.userName
+      });
       console.log(classNames)
       console.log(attended)
       var out = []
       for(name in classNames){
-        if(attended.indexOf(name.userName) === -1){
-          out.push(name.userName)
+        if(attended.indexOf(name) === -1){
+          out.push(name)
         }
       }
       res.send(out)
