@@ -44,14 +44,18 @@ app.get("/init", function(req, res){
 app.get("/studentnames", function(req, res){
 
   var q = req.query;
+  console.log(q)
   var classNames;
   var attended;
-  db.query("SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE className="+'"' + req.query.class + '"', function (error, results, fields) {
+  db.query("SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE className="+'"' + q.class + '"', function (error, results, fields) {
     classNames=results;
   })
-  db.query("SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE dateCheckedIn="+'"' + req.query.date + '"', function (error, results, fields) {
+  db.query("SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE dateCheckedIn="+'"' + q.date + '"', function (error, results, fields) {
     attended=results;
   })
+
+  console.log(classNames)
+  console.log(attended)
   var out = []
   for(name in classNames){
     if(attended.indexOf(name) === -1){
