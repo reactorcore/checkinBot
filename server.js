@@ -96,7 +96,7 @@ var query = "SELECT * FROM AllTheBase.Checkins WHERE className = '" + req.query.
 
 app.post("/checkin",function(req,res){
 
-  db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_name+"' AND className = '"+req.body.team_domain+"' AND dateCheckedIn = '" + moment.utc().subtract(5, 'hour').format("L")+ "';", function (error, results, fields) {
+  db.query("SELECT * FROM AllTheBase.Checkins WHERE userName = '"+req.body.user_id+"' AND className = '"+req.body.team_domain+"' AND dateCheckedIn = '" + moment.utc().subtract(5, 'hour').format("L")+ "';", function (error, results, fields) {
     if(error){
       console.log(error)
     } else {
@@ -105,7 +105,7 @@ app.post("/checkin",function(req,res){
         return res.send("Already Checked in for today, Good Job!")
 
       } else {
-        db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_name+"', '"+req.body.team_domain+"', '"+ moment.utc().subtract(5, 'hour').format("L") +"');", function (error, results, fields) {
+        db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_id+"', '"+req.body.team_domain+"', '"+ moment.utc().subtract(5, 'hour').format("L") +"');", function (error, results, fields) {
           if(error){
             console.log(error)
           } else {
