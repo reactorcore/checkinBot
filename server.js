@@ -59,12 +59,10 @@ app.get("/studentnames", function(req, res){
       attended=results.map(function(e){
         return e.userName
       });
-      console.log(classNames)
-      console.log(attended)
       var out = []
-      for(name in classNames){
-        if(attended.indexOf(name) === -1){
-          out.push(name)
+      for(i = 0; i < classNames.length; i++){
+        if(!attended.includes(classNames[i])){
+          out.push(classNames[i])
         }
       }
       res.send(out)
