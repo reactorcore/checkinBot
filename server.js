@@ -40,6 +40,25 @@ app.get("/init", function(req, res){
   })
 })
 
+
+app.get("/studentnames", function(req, res){
+
+  var q = req.query;
+  var classNames;
+  var attended;
+  db.query("SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE className="+'"' + req.query.class + '"', function (error, results, fields) {
+    classNames=results;
+  })
+  db.query("SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE dateCheckedIn="+'"' + req.query.date + '"', function (error, results, fields) {
+    attended=results;
+  })
+
+  var out = classNames.filter(function(obj) { return attended.indexOf(obj) == -1; });
+
+  res.send(out)
+
+})
+
 // app.get('/getclass', function(req, res) {
 //    res.json({ querystring_breed: req.query.breed });
 // });
