@@ -47,10 +47,10 @@ app.get("/studentnames", function(req, res){
   console.log(q)
   var classNames;
   var attended;
-  db.query("SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE className="+'"' + q.class + '"', function (error, results, fields) {
+  db.query('SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE className="'+q.class+'"', function (error, results, fields) {
     classNames=results;
   })
-  db.query("SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE dateCheckedIn="+'"' + q.date + '"', function (error, results, fields) {
+  db.query('SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE dateCheckedIn="' + q.date + '"', function (error, results, fields) {
     attended=results;
   })
 
