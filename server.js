@@ -49,25 +49,26 @@ app.get("/studentnames", function(req, res){
   var checkedInQuery = 'SELECT DISTINCT userName FROM AllTheBase.Checkins WHERE dateCheckedIn="' + q.date + '"'
   var classNames;
   var attended;
+  var out = []
   console.log(classQuery)
   console.log(checkedInQuery)
   db.query(classQuery, function (error, results, fields) {
     classNames=results;
-  })
-  db.query(checkedInQuery, function (error, results, fields) {
-    attended=results;
-  })
-
-  console.log(classNames)
-  console.log(attended)
-  var out = []
-  for(name in classNames){
-    if(attended.indexOf(name) === -1){
-      out.push(name)
+  }).then(function(){
+    db.query(checkedInQuery, function (error, results, fields) {
+      attended=results;
+    })
+  }).then(function(){
+    console.log(classNames)
+    console.log(attended)
+    for(name in classNames){
+      if(attended.indexOf(name) === -1){
+        out.push(name)
+      }
     }
-  }
-
-  res.send(out)
+  }).then(function(){
+    res.send(out)
+  })
 
 })
 
