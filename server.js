@@ -105,7 +105,7 @@ app.post("/checkin",function(req,res){
         return res.send("Already Checked in for today, Good Job!")
 
       } else {
-        db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_id+"', '"+req.body.team_domain+"', '"+ moment.utc().subtract(5, 'hour').format("L") +"');", function (error, results, fields) {
+        db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn) VALUES ('"+req.body.user_name+"', '"+req.body.team_domain+"', '"+ moment.utc().subtract(5, 'hour').format("L") +"');", function (error, results, fields) {
           if(error){
             console.log(error)
           } else {
@@ -117,6 +117,18 @@ app.post("/checkin",function(req,res){
     }
 
   })
+
+})
+
+app.post("/faq",function(req,res){
+
+  res.send(`
+Learn : https://learn.makerpass.com
+Challenge : https://challenge.makerpass.com
+Helpdesk : https://helpdesk.makerpass.com
+Google : https://google.com
+MDN : https://mzl.la/1lhv2uF
+    `)
 
 })
 app.listen(process.env.PORT || 1337)
