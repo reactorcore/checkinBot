@@ -106,7 +106,7 @@ app.post("/checkin",function(req,res){
 
       } else {
         let r = req.body;
-        db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn, slackUID) VALUES ('"+r.user_name+"', '"+r.team_domain+"', '"+ moment.utc().subtract(5, 'hour').format("L") +"', '" + r.user_id + "'');", function (error, results, fields) {
+        db.query("INSERT INTO AllTheBase.Checkins (userName, className, dateCheckedIn, slackUID) VALUES ('"+r.user_name+"', '"+r.team_domain+"', '"+ moment.utc().subtract(5, 'hour').format("L") +"', '" + r.user_id + "');", function (error, results, fields) {
           if(error){
             res.send(error)
           } else {
